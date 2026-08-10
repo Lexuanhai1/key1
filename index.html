@@ -6,7 +6,7 @@
 <title>AuthPremium — Quản lý Key (Owner)</title>
 <style>
   * { margin: 0; padding: 0; box-sizing: border-box; }
-  body { font-family: 'Inter', 'Segoe UI', system-ui, sans-serif; background: #0b0e14; color: #e2e8f0; min-height: 100vh; }
+  body { font-family: 'Segoe UI', system-ui, sans-serif; background: #0b0e14; color: #e2e8f0; min-height: 100vh; }
   ::-webkit-scrollbar { width: 6px; }
   ::-webkit-scrollbar-track { background: transparent; }
   ::-webkit-scrollbar-thumb { background: #2d3748; border-radius: 3px; }
@@ -20,26 +20,23 @@
   .login-box .sub { text-align: center; color: #64748b; margin-bottom: 28px; font-size: 13px; }
   .login-box input { width: 100%; padding: 12px 14px; margin-bottom: 14px; background: #0f131a; border: 1px solid #2d3748; border-radius: 10px; color: #e2e8f0; font-size: 14px; transition: all 0.2s; }
   .login-box input:focus { border-color: #7c3aed; outline: none; box-shadow: 0 0 0 3px rgba(124,58,237,0.15); }
-  .login-box input::placeholder { color: #475569; }
   .login-box button { width: 100%; padding: 12px; background: linear-gradient(135deg, #7c3aed, #8b5cf6); border: none; border-radius: 10px; color: #fff; font-size: 15px; font-weight: 600; cursor: pointer; transition: all 0.2s; }
   .login-box button:hover { transform: translateY(-1px); box-shadow: 0 8px 24px rgba(124,58,237,0.35); }
-  .login-box button:disabled { opacity: 0.6; cursor: not-allowed; transform: none; }
   .login-error { color: #f87171; font-size: 13px; text-align: center; margin-top: 12px; display: none; background: rgba(248,113,113,0.1); padding: 8px 12px; border-radius: 8px; }
   .login-error.show { display: block; }
 
   /* ─── App ─── */
   .app { display: none; max-width: 1100px; margin: 0 auto; padding: 32px 24px; }
   .app.active { display: block; }
-  .topbar { display: flex; align-items: center; justify-content: space-between; margin-bottom: 28px; }
+  .topbar { display: flex; align-items: center; justify-content: space-between; margin-bottom: 28px; gap: 12px; flex-wrap: wrap; }
   .brand { display: flex; align-items: center; gap: 12px; }
   .brand-icon { width: 42px; height: 42px; background: linear-gradient(135deg, #7c3aed, #8b5cf6); border-radius: 12px; display: flex; align-items: center; justify-content: center; font-size: 20px; }
   .brand-text { font-size: 19px; font-weight: 700; color: #f1f5f9; }
   .brand-sub { font-size: 12px; color: #64748b; }
-  .logout-btn { padding: 8px 16px; background: rgba(248,113,113,0.1); color: #f87171; border: 1px solid rgba(248,113,113,0.2); border-radius: 8px; cursor: pointer; font-size: 13px; font-weight: 600; transition: all 0.15s; }
-  .logout-btn:hover { background: rgba(248,113,113,0.2); }
+  .topbar-actions { display: flex; gap: 8px; align-items: center; }
+  .logout-btn { padding: 8px 16px; background: rgba(248,113,113,0.1); color: #f87171; border: 1px solid rgba(248,113,113,0.2); border-radius: 8px; cursor: pointer; font-size: 13px; font-weight: 600; }
 
-  /* ─── Stats ─── */
-  .stats-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(180px, 1fr)); gap: 14px; margin-bottom: 24px; }
+  .stats-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(170px, 1fr)); gap: 14px; margin-bottom: 24px; }
   .stat-card { background: linear-gradient(135deg, #161b26 0%, #121720 100%); border: 1px solid #1e2430; border-radius: 12px; padding: 20px; }
   .stat-card .v { font-size: 28px; font-weight: 700; color: #f1f5f9; }
   .stat-card .l { font-size: 13px; color: #64748b; margin-top: 4px; }
@@ -48,14 +45,14 @@
   .stat-card.yellow .v { color: #fbbf24; }
   .stat-card.purple .v { color: #a855f7; }
 
-  /* ─── Create form ─── */
   .card { background: linear-gradient(135deg, #161b26 0%, #121720 100%); border: 1px solid #1e2430; border-radius: 12px; padding: 24px; margin-bottom: 24px; }
   .card h3 { font-size: 16px; color: #e2e8f0; margin-bottom: 16px; display: flex; align-items: center; gap: 8px; }
   .form-row { display: flex; gap: 12px; flex-wrap: wrap; align-items: flex-end; }
-  .form-field { flex: 1; min-width: 160px; }
+  .form-field { flex: 1; min-width: 150px; }
   .form-field label { display: block; font-size: 12px; color: #64748b; margin-bottom: 6px; font-weight: 600; }
-  .form-field input { width: 100%; padding: 10px 12px; background: #0f131a; border: 1px solid #2d3748; border-radius: 8px; color: #e2e8f0; font-size: 14px; transition: all 0.2s; }
-  .form-field input:focus { border-color: #7c3aed; outline: none; box-shadow: 0 0 0 3px rgba(124,58,237,0.1); }
+  .form-field input { width: 100%; padding: 10px 12px; background: #0f131a; border: 1px solid #2d3748; border-radius: 8px; color: #e2e8f0; font-size: 14px; }
+  .form-field input:focus { border-color: #7c3aed; outline: none; }
+
   .btn { padding: 10px 18px; border: none; border-radius: 8px; cursor: pointer; font-size: 13px; font-weight: 600; transition: all 0.15s; display: inline-flex; align-items: center; gap: 6px; }
   .btn-neon { background: linear-gradient(135deg, #7c3aed, #8b5cf6); color: #fff; box-shadow: 0 4px 16px rgba(124,58,237,0.25); }
   .btn-neon:hover { box-shadow: 0 6px 24px rgba(124,58,237,0.4); transform: translateY(-1px); }
@@ -67,62 +64,46 @@
   .btn-primary:hover { background: rgba(124,58,237,0.2); }
   .btn-secondary { background: rgba(71,85,105,0.3); color: #94a3b8; border: 1px solid rgba(71,85,105,0.2); }
   .btn-secondary:hover { background: rgba(71,85,105,0.45); }
-  .btn:disabled { opacity: 0.5; cursor: not-allowed; }
 
-  /* ─── Table ─── */
   .table-wrap { overflow-x: auto; border: 1px solid #1e2430; border-radius: 12px; background: #121720; }
   table { width: 100%; border-collapse: collapse; }
   th { padding: 12px 16px; text-align: left; font-size: 12px; font-weight: 600; color: #475569; text-transform: uppercase; letter-spacing: 0.8px; border-bottom: 1px solid #1e2430; background: #0f131a; }
   td { padding: 12px 16px; font-size: 14px; color: #cbd5e1; border-bottom: 1px solid #1a1f2a; }
   tr:last-child td { border-bottom: none; }
   tr:hover td { background: rgba(124,58,237,0.03); }
-  .key-code { font-family: 'JetBrains Mono', Consolas, monospace; font-weight: 600; color: #c084fc; letter-spacing: 0.5px; user-select: all; }
+  .key-code { font-family: Consolas, monospace; font-weight: 600; color: #c084fc; letter-spacing: 0.5px; user-select: all; }
   .muted { color: #64748b; font-size: 13px; }
   .badge { display: inline-flex; align-items: center; gap: 4px; padding: 3px 10px; border-radius: 20px; font-size: 12px; font-weight: 600; }
   .badge-green { background: rgba(52,211,153,0.1); color: #34d399; border: 1px solid rgba(52,211,153,0.15); }
   .badge-red { background: rgba(248,113,113,0.1); color: #f87171; border: 1px solid rgba(248,113,113,0.15); }
   .badge-yellow { background: rgba(251,191,36,0.1); color: #fbbf24; border: 1px solid rgba(251,191,36,0.15); }
   .btn-group { display: flex; gap: 6px; flex-wrap: wrap; }
+  .empty { text-align: center; padding: 40px; color: #475569; font-size: 14px; }
 
-  /* ─── Toast ─── */
+  .toolbar { display: flex; gap: 10px; flex-wrap: wrap; align-items: center; margin-bottom: 16px; }
+  .toolbar input[type=text] { flex: 1; min-width: 200px; padding: 10px 14px; background: #0f131a; border: 1px solid #1e2430; border-radius: 10px; color: #e2e8f0; font-size: 14px; }
+  .toolbar input[type=text]:focus { border-color: #7c3aed; outline: none; }
+
+  .modal-overlay { display: none; position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: rgba(0,0,0,0.7); z-index: 900; justify-content: center; align-items: center; backdrop-filter: blur(4px); }
+  .modal-overlay.active { display: flex; }
+  .modal-box { background: linear-gradient(180deg, #1e2430 0%, #161b26 100%); border: 1px solid #2d3748; border-radius: 16px; padding: 28px; width: 460px; max-width: 92%; box-shadow: 0 25px 60px rgba(0,0,0,0.5); max-height: 88vh; overflow-y: auto; }
+  .modal-box h3 { color: #f1f5f9; margin-bottom: 16px; font-size: 17px; }
+  .modal-box .form-field { margin-bottom: 14px; }
+  .modal-box .btn-group { justify-content: flex-end; margin-top: 20px; }
+  .info-row { display: flex; justify-content: space-between; padding: 9px 0; border-bottom: 1px solid #1a1f2a; font-size: 14px; gap: 12px; }
+  .info-row:last-child { border-bottom: none; }
+  .info-row .k { color: #64748b; flex-shrink: 0; }
+  .info-row .v { color: #e2e8f0; font-weight: 500; text-align: right; word-break: break-all; }
+
   .toast { position: fixed; bottom: 24px; left: 50%; transform: translateX(-50%) translateY(100px); background: #1e2430; border: 1px solid #2d3748; color: #e2e8f0; padding: 12px 20px; border-radius: 10px; font-size: 14px; box-shadow: 0 12px 40px rgba(0,0,0,0.5); transition: all 0.25s ease; opacity: 0; z-index: 1000; max-width: 90%; }
   .toast.show { transform: translateX(-50%) translateY(0); opacity: 1; }
   .toast.success { border-color: rgba(52,211,153,0.4); color: #34d399; }
   .toast.error { border-color: rgba(248,113,113,0.4); color: #f87171; }
 
-  /* ─── Modal ─── */
-  .modal-overlay { display: none; position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: rgba(0,0,0,0.7); z-index: 900; justify-content: center; align-items: center; backdrop-filter: blur(4px); }
-  .modal-overlay.active { display: flex; }
-  .modal-box { background: linear-gradient(180deg, #1e2430 0%, #161b26 100%); border: 1px solid #2d3748; border-radius: 16px; padding: 28px; width: 460px; max-width: 92%; box-shadow: 0 25px 60px rgba(0,0,0,0.5); }
-  .modal-box h3 { color: #f1f5f9; margin-bottom: 16px; font-size: 17px; }
-  .modal-box .form-field { margin-bottom: 14px; }
-  .modal-box .btn-group { justify-content: flex-end; margin-top: 20px; }
-  .info-row { display: flex; justify-content: space-between; padding: 9px 0; border-bottom: 1px solid #1a1f2a; font-size: 14px; }
-  .info-row:last-child { border-bottom: none; }
-  .info-row .k { color: #64748b; }
-  .info-row .v { color: #e2e8f0; font-weight: 500; text-align: right; word-break: break-all; }
-  .info-section { margin-top: 14px; padding: 8px 0 6px; color: #38bdf8; font-weight: 700; font-size: 13px; text-transform: uppercase; letter-spacing: .5px; border-bottom: 1px solid #1a1f2a; }
-  .server-row { padding: 9px 0; border-bottom: 1px solid #141826; }
-  .server-row:last-child { border-bottom: none; }
-  .server-name { color: #e2e8f0; font-weight: 600; font-size: 14px; }
-
-  /* ─── Server list in table ─── */
-  .srv-cell { min-width: 220px; }
-  .srv-count { font-weight: 600; margin-bottom: 6px; }
-  .srv-list { display: flex; flex-direction: column; gap: 4px; }
-  .srv-item { display: flex; align-items: center; gap: 6px; font-size: 13px; color: #cbd5e1; }
-  .srv-item .srv-ip { color: #64748b; font-size: 12px; }
-  .srv-item .srv-proxy { color: #a855f7; font-size: 11px; background: rgba(168,85,247,0.12); border: 1px solid rgba(168,85,247,0.2); padding: 1px 6px; border-radius: 8px; white-space: nowrap; }
-  .srv-item .srv-time { color: #475569; font-size: 12px; margin-left: auto; white-space: nowrap; }
-  .dot { width: 8px; height: 8px; border-radius: 50%; flex-shrink: 0; }
-  .dot.online { background: #34d399; box-shadow: 0 0 6px rgba(52,211,153,0.7); animation: pulse 2s infinite; }
-  .dot.offline { background: #475569; }
-  @keyframes pulse { 0%, 100% { opacity: 1; } 50% { opacity: 0.45; } }
-  .empty { text-align: center; padding: 40px; color: #475569; font-size: 14px; }
-  .search-box { display: flex; gap: 10px; margin-bottom: 16px; }
-  .search-box input { flex: 1; padding: 10px 14px; background: #0f131a; border: 1px solid #1e2430; border-radius: 10px; color: #e2e8f0; font-size: 14px; }
-  .search-box input:focus { border-color: #7c3aed; outline: none; }
-  .search-box input::placeholder { color: #475569; }
+  details.help { background: rgba(56,189,248,0.05); border: 1px solid rgba(56,189,248,0.15); border-radius: 12px; padding: 18px 22px; margin-bottom: 24px; }
+  details.help summary { cursor: pointer; color: #38bdf8; font-weight: 700; font-size: 14px; }
+  details.help ol { margin: 12px 0 0 20px; color: #94a3b8; font-size: 13.5px; line-height: 1.9; }
+  details.help code { background: #0f131a; border: 1px solid #1e2430; padding: 1px 6px; border-radius: 6px; color: #c084fc; font-size: 12.5px; }
 </style>
 </head>
 <body>
@@ -132,10 +113,10 @@
   <div class="login-box">
     <div class="logo">🔑</div>
     <h1>AuthPremium Keys</h1>
-    <p class="sub">Chỉ OWNER mới được sử dụng — tài khoản riêng (khác Dashboard)</p>
+    <p class="sub">Chỉ OWNER sử dụng — file chạy độc lập, không cần server</p>
     <input type="text" id="loginUser" placeholder="Username" autocomplete="username">
     <input type="password" id="loginPass" placeholder="Mật khẩu" autocomplete="current-password">
-    <button id="loginBtn" onclick="doLogin()">🔐 Đăng nhập</button>
+    <button id="loginBtn" onclick="doLogin()">🔐 Mở khóa</button>
     <div class="login-error" id="loginError"></div>
   </div>
 </div>
@@ -147,11 +128,25 @@
       <div class="brand-icon">🔑</div>
       <div>
         <div class="brand-text">Quản lý Key</div>
-        <div class="brand-sub">AuthPremium By XuanHai26 — chỉ owner</div>
+        <div class="brand-sub">AuthPremium By XuanHai26 — chỉ owner · chạy độc lập trong trình duyệt</div>
       </div>
     </div>
-    <button class="logout-btn" onclick="doLogout()">↩ Đăng xuất</button>
+    <div class="topbar-actions">
+      <button class="btn btn-secondary" onclick="document.getElementById('helpBox').open = !document.getElementById('helpBox').open">❓ Cách dùng</button>
+      <button class="logout-btn" onclick="doLogout()">↩ Khóa lại</button>
+    </div>
   </div>
+
+  <details class="help" id="helpBox">
+    <summary>📖 Cách dùng — web key KHÔNG liên quan tới build plugin</summary>
+    <ol>
+      <li>Tạo key ở form bên dưới → bấm <b>📋 Copy</b> gửi cho khách, hoặc…</li>
+      <li>Bấm <b>⬇️ Export keys.json</b> → lấy file <code>keys.json</code> đặt vào <code>plugins/AuthPremium/keys.json</code> của server con (plugin đọc file này để xác thực key, tự nạp lại mỗi phút).</li>
+      <li>Khách gõ <code>/atp key &lt;KEY&gt;</code> (hoặc ghi key vào <code>key.txt</code> rồi <code>/atp reload</code>) — key nằm trong <code>keys.json</code> và còn hạn là dùng được.</li>
+      <li>Xoá / <b>Chặn</b> key ở đây → <b>export lại keys.json</b> đưa lên server → plugin tự khoá key đó trong ≤ 1 phút.</li>
+      <li>Toàn bộ dữ liệu lưu trong <b>trình duyệt này</b> (localStorage). Muốn chuyển máy: Export → Import ở máy mới.</li>
+    </ol>
+  </details>
 
   <div class="stats-grid">
     <div class="stat-card purple"><div class="v" id="statTotal">0</div><div class="l">Tổng key</div></div>
@@ -164,11 +159,11 @@
     <h3>➕ Tạo key mới</h3>
     <div class="form-row">
       <div class="form-field">
-        <label>Số ngày hiệu lực</label>
-        <input type="number" id="createDays" placeholder="VD: 30" min="1" max="36500">
+        <label>Số ngày hiệu lực <span class="muted">(0 = vĩnh viễn)</span></label>
+        <input type="number" id="createDays" placeholder="VD: 30" min="0" max="36500" value="30">
       </div>
       <div class="form-field">
-        <label>Số server tối đa <span class="muted" style="font-weight:400">(0 = không giới hạn)</span></label>
+        <label>Số server tối đa <span class="muted">(0 = không giới hạn)</span></label>
         <input type="number" id="createMaxServers" placeholder="VD: 3" min="0" max="1000" value="0">
       </div>
       <div class="form-field" style="flex:2">
@@ -181,8 +176,12 @@
 
   <div class="card">
     <h3>🗝 Danh sách key</h3>
-    <div class="search-box">
+    <div class="toolbar">
       <input type="text" id="searchInput" placeholder="Tìm theo mã key hoặc ghi chú..." oninput="renderTable()">
+      <button class="btn btn-secondary" onclick="exportKeysJson()">⬇️ Export keys.json</button>
+      <label class="btn btn-primary" style="cursor:pointer">⬆️ Import
+        <input type="file" id="importFile" accept=".json" style="display:none" onchange="importKeysJson(event)">
+      </label>
     </div>
     <div class="table-wrap">
       <table>
@@ -190,14 +189,14 @@
           <tr>
             <th>Key</th>
             <th>Trạng thái</th>
-            <th>Server</th>
+            <th>Giới hạn server</th>
             <th>Ngày tạo</th>
             <th>Hết hạn</th>
             <th>Ghi chú</th>
             <th style="text-align:right">Thao tác</th>
           </tr>
         </thead>
-        <tbody id="keyTable"><tr><td colspan="7"><div class="empty">Đang tải...</div></td></tr></tbody>
+        <tbody id="keyTable"><tr><td colspan="7"><div class="empty">Chưa có key nào. Tạo key ở form bên trên.</div></td></tr></tbody>
       </table>
     </div>
   </div>
@@ -233,274 +232,325 @@
 <div class="toast" id="toast"></div>
 
 <script>
-// ═══════════════════════════════════════════════════════════
-//  WEB KEY — GIAO DIỆN ĐỘC LẬP (KHÔNG phải plugin)
-//  File này CHỈ là giao diện + đã gắn sẵn API gọi key:
-//    - /api/owner/login (đăng nhập owner)
-//    - /api/keys* (tạo / xoá / gia hạn / chặn / check info)
-//    - /api/license/check (chỉ để test nhanh — server khách gọi)
-//  Có thể mở ở BẤT KỲ ĐÂU (host riêng / mở thẳng file) — đổi
-//  API_BASE trỏ về server webkey (vd http://IP:45680) là chạy.
-//  Server webkey (WebKeyServer) chỉ cần chạy phần API — đã bật CORS.
-// ═══════════════════════════════════════════════════════════
-// ▶ ĐỔI CHỖ NÀY nếu mở index.html ở nơi khác (không phải từ webkey server):
-const API_BASE = ''; // '' = cùng server; vd 'http://123.45.67.89:45680'
+// ═══════════════════════════════════════════════════════════════════
+//  WEB KEY — FILE DUY NHẤT, CHẠY ĐỘC LẬP (KHÔNG phải plugin, KHÔNG cần server)
+//  - Tạo / gia hạn / chặn / xoá key ngay trong trình duyệt (localStorage).
+//  - Export "keys.json" đúng định dạng plugin đọc → bỏ vào plugins/AuthPremium/.
+//  - Import keys.json cũ để tiếp tục quản lý.
+//
+//  ĐỔI TK/MK: tính SHA-256 của tk/mk mới rồi thay 2 dòng USER_HASH/PASS_HASH
+//  (tự tính tại: https://emn178.github.io/online-tools/sha256.html — gõ đúng chuỗi)
+//  Không chứa tk/mk plaintext — chỉ chứa hash.
+// ═══════════════════════════════════════════════════════════════════
+const USER_HASH = 'f2d5704a8b85185077889e8572a489ececcbf638038ff3f60a1cbe9068115d12'; // "xuanhai26"
+const PASS_HASH = '174054d991cef4f9ccaefe974e429260e4ff13ff5ec97b0a1d8b7e5398071e20'; // "lexuanhai1@LX@"
+const STORE_KEY = 'authpremium_webkey_keys';
+const UNLOCK_KEY = 'authpremium_webkey_unlocked';
+const KEY_ALPHABET = 'ABCDEFGHJKLMNPQRSTUVWXYZ23456789';
 
-let token = localStorage.getItem('owner_token');
-let keys = [];
+let keys = loadKeys();
 let renewCode = '';
 
 const $ = id => document.getElementById(id);
 
+// ─── Utils ───
+// SHA-256: ưu tiên SubtleCrypto, fallback bản thuần JS (chạy cả khi mở file trực tiếp / trình duyệt cũ)
+function sha256Fallback(str) {
+  const K = [0x428a2f98,0x71374491,0xb5c0fbcf,0xe9b5dba5,0x3956c25b,0x59f111f1,0x923f82a4,0xab1c5ed5,
+    0xd807aa98,0x12835b01,0x243185be,0x550c7dc3,0x72be5d74,0x80deb1fe,0x9bdc06a7,0xc19bf174,
+    0xe49b69c1,0xefbe4786,0x0fc19dc6,0x240ca1cc,0x2de92c6f,0x4a7484aa,0x5cb0a9dc,0x76f988da,
+    0x983e5152,0xa831c66d,0xb00327c8,0xbf597fc7,0xc6e00bf3,0xd5a79147,0x06ca6351,0x14292967,
+    0x27b70a85,0x2e1b2138,0x4d2c6dfc,0x53380d13,0x650a7354,0x766a0abb,0x81c2c92e,0x92722c85,
+    0xa2bfe8a1,0xa81a664b,0xc24b8b70,0xc76c51a3,0xd192e819,0xd6990624,0xf40e3585,0x106aa070,
+    0x19a4c116,0x1e376c08,0x2748774c,0x34b0bcb5,0x391c0cb3,0x4ed8aa4a,0x5b9cca4f,0x682e6ff3,
+    0x748f82ee,0x78a5636f,0x84c87814,0x8cc70208,0x90befffa,0xa4506ceb,0xbef9a3f7,0xc67178f2];
+  const rotr = (x, n) => (x >>> n) | (x << (32 - n));
+  let h0 = 0x6a09e667, h1 = 0xbb67ae85, h2 = 0x3c6ef372, h3 = 0xa54ff53a,
+      h4 = 0x510e527f, h5 = 0x9b05688c, h6 = 0x1f83d9ab, h7 = 0x5be0cd19;
+  const bytes = [];
+  for (let i = 0; i < str.length; i++) bytes.push(str.charCodeAt(i) & 0xff);
+  const bitLen = bytes.length * 8;
+  bytes.push(0x80);
+  while (bytes.length % 64 !== 56) bytes.push(0);
+  for (let i = 7; i >= 0; i--) bytes.push((bitLen / Math.pow(2, i * 8)) & 0xff);
+  for (let off = 0; off < bytes.length; off += 64) {
+    const w = new Array(64);
+    for (let i = 0; i < 16; i++)
+      w[i] = (bytes[off + i * 4] << 24) | (bytes[off + i * 4 + 1] << 16) | (bytes[off + i * 4 + 2] << 8) | bytes[off + i * 4 + 3];
+    for (let i = 16; i < 64; i++) {
+      const s0 = rotr(w[i - 15], 7) ^ rotr(w[i - 15], 18) ^ (w[i - 15] >>> 3);
+      const s1 = rotr(w[i - 2], 17) ^ rotr(w[i - 2], 19) ^ (w[i - 2] >>> 10);
+      w[i] = (w[i - 16] + s0 + w[i - 7] + s1) | 0;
+    }
+    let a = h0, b = h1, c = h2, d = h3, e = h4, f = h5, g = h6, h = h7;
+    for (let i = 0; i < 64; i++) {
+      const S1 = rotr(e, 6) ^ rotr(e, 11) ^ rotr(e, 25);
+      const ch = (e & f) ^ (~e & g);
+      const t1 = (h + S1 + ch + K[i] + w[i]) | 0;
+      const S0 = rotr(a, 2) ^ rotr(a, 13) ^ rotr(a, 22);
+      const maj = (a & b) ^ (a & c) ^ (b & c);
+      const t2 = (S0 + maj) | 0;
+      h = g; g = f; f = e; e = (d + t1) | 0; d = c; c = b; b = a; a = (t1 + t2) | 0;
+    }
+    h0 = (h0 + a) | 0; h1 = (h1 + b) | 0; h2 = (h2 + c) | 0; h3 = (h3 + d) | 0;
+    h4 = (h4 + e) | 0; h5 = (h5 + f) | 0; h6 = (h6 + g) | 0; h7 = (h7 + h) | 0;
+  }
+  const hex = n => (n >>> 0).toString(16).padStart(8, '0');
+  return hex(h0) + hex(h1) + hex(h2) + hex(h3) + hex(h4) + hex(h5) + hex(h6) + hex(h7);
+}
+async function sha256(str) {
+  if (typeof crypto !== 'undefined' && crypto.subtle && crypto.subtle.digest) {
+    try {
+      const buf = await crypto.subtle.digest('SHA-256', new TextEncoder().encode(str));
+      return Array.from(new Uint8Array(buf)).map(b => b.toString(16).padStart(2, '0')).join('');
+    } catch (e) { /* fallback bên dưới */ }
+  }
+  return sha256Fallback(str);
+}
 function toast(msg, type) {
   const t = $('toast');
   t.textContent = msg;
   t.className = 'toast show ' + (type || '');
   setTimeout(() => t.className = 'toast', 2800);
 }
-
-async function api(path, method, body) {
-  const headers = {};
-  if (body) headers['Content-Type'] = 'application/x-www-form-urlencoded';
-  try {
-    if (token) {
-      headers['Authorization'] = 'Bearer ' + token;
-      const r = await fetch(API_BASE + path, { method, headers, body });
-      if (r.status !== 401) return r.status === 200 ? r.json().catch(() => null) : r.json().catch(() => null);
-    }
-  } catch (e) { return null; }
-  doLogout();
-  return null;
+function fmtTs(ts) {
+  if (!ts) return '∞ Vĩnh viễn';
+  return new Date(ts).toLocaleString('vi-VN', { day: '2-digit', month: '2-digit', year: 'numeric', hour: '2-digit', minute: '2-digit' });
 }
+function escapeHtml(s) {
+  return String(s == null ? '' : s).replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;').replace(/"/g, '&quot;');
+}
+function now() { return Date.now(); }
+function isActive(k) { return !k.disabled && (k.expiresAt <= 0 || k.expiresAt > now()); }
+function isExpired(k) { return k.expiresAt > 0 && k.expiresAt <= now(); }
 
-// ─── LOGIN (tài khoản OWNER riêng — cấu hình trong config.json) ───
+function loadKeys() {
+  try {
+    const raw = localStorage.getItem(STORE_KEY);
+    if (!raw) return [];
+    const arr = JSON.parse(raw);
+    return Array.isArray(arr) ? arr : [];
+  } catch (e) { return []; }
+}
+function persist() { localStorage.setItem(STORE_KEY, JSON.stringify(keys)); }
+
+// ─── Login ───
 async function doLogin() {
   const u = $('loginUser').value.trim();
   const p = $('loginPass').value;
   const err = $('loginError');
   err.classList.remove('show');
-  if (!u || !p) { err.textContent = 'Nhập đầy đủ username và mật khẩu!'; err.classList.add('show'); return; }
+  if (!u || !p) { err.textContent = 'Nhập đầy đủ tên đăng nhập và mật khẩu!'; err.classList.add('show'); return; }
   const btn = $('loginBtn'); btn.disabled = true;
   try {
-    const r = await fetch(API_BASE + '/api/owner/login', {
-      method: 'POST',
-      headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
-      body: 'username=' + encodeURIComponent(u) + '&password=' + encodeURIComponent(p)
-    });
-    if (!r.ok) { err.textContent = 'Sai tên đăng nhập hoặc mật khẩu!'; err.classList.add('show'); return; }
-    const d = await r.json();
-    if (d.token) { token = d.token; localStorage.setItem('owner_token', token); }
-    enterApp();
+    const [uh, ph] = await Promise.all([sha256(u), sha256(p)]);
+    if (uh === USER_HASH && ph === PASS_HASH) {
+      localStorage.setItem(UNLOCK_KEY, '1');
+      enterApp();
+    } else {
+      err.textContent = 'Sai tên đăng nhập hoặc mật khẩu!';
+      err.classList.add('show');
+    }
   } catch (e) {
-    err.textContent = 'Không kết nối được server!'; err.classList.add('show');
+    err.textContent = 'Có lỗi khi mở khóa: ' + e.message;
+    err.classList.add('show');
   } finally { btn.disabled = false; }
 }
 
 function doLogout() {
-  if (window.__refreshTimer) { clearInterval(window.__refreshTimer); window.__refreshTimer = null; }
-  token = null;
-  localStorage.removeItem('owner_token');
+  localStorage.removeItem(UNLOCK_KEY);
   $('app').classList.remove('active');
   $('loginContainer').style.display = 'flex';
   $('loginUser').value = ''; $('loginPass').value = '';
 }
 
-async function enterApp() {
+function enterApp() {
   $('loginContainer').style.display = 'none';
   $('app').classList.add('active');
-  await loadKeys();
-  // Tự làm mới bảng định kỳ — trạng thái online/offline của server cập nhật theo lastSeen
-  if (window.__refreshTimer) clearInterval(window.__refreshTimer);
-  window.__refreshTimer = setInterval(() => { if (token) loadKeys(); }, 30000);
-}
-
-// ─── LOAD / RENDER ───
-async function loadKeys() {
-  const data = await api('/api/keys', 'GET');
-  keys = (data && data.keys) ? data.keys : [];
-  updateStats();
   renderTable();
 }
 
-function updateStats() {
-  $('statTotal').textContent = keys.length;
-  $('statActive').textContent = keys.filter(k => k.active).length;
-  $('statExpired').textContent = keys.filter(k => k.expired).length;
-  $('statDisabled').textContent = keys.filter(k => k.disabled).length;
-}
-
-function fmtTs(ts) {
-  if (!ts) return '—';
-  return new Date(ts).toLocaleString('vi-VN', { day: '2-digit', month: '2-digit', year: 'numeric', hour: '2-digit', minute: '2-digit' });
-}
-
-// Thời gian tương đối: "vừa xong" / "3 phút trước" / "2 giờ trước" / "5 ngày trước"
-function timeAgo(ts) {
-  if (!ts) return 'chưa báo cáo';
-  const s = Math.max(0, Math.floor((Date.now() - ts) / 1000));
-  if (s < 60) return 'vừa xong';
-  const m = Math.floor(s / 60);
-  if (m < 60) return m + ' phút trước';
-  const h = Math.floor(m / 60);
-  if (h < 24) return h + ' giờ trước';
-  const d = Math.floor(h / 24);
-  return d + ' ngày trước';
-}
-
-// 1 dòng server kèm chấm trạng thái online/offline (theo lastSeen) + tên server con proxy
-function serverRow(s) {
-  const cls = s.online ? 'online' : 'offline';
-  const st = s.online ? '🟢 Online' : '⚪ Offline';
-  const proxy = s.proxyName ? ` &nbsp;•&nbsp; 🔗 ${escapeHtml(s.proxyName)}` : '';
-  return `<div class="server-row">
-    <div class="server-name"><span class="dot ${cls}"></span> ${s.serverName ? escapeHtml(s.serverName) : '—'} <span class="muted">(${st})</span> <span class="muted">(id: ${escapeHtml(s.serverId)})</span></div>
-    <div class="muted">IP: ${s.serverIp ? escapeHtml(s.serverIp) : '—'} &nbsp;•&nbsp; MC ${s.serverVersion ? escapeHtml(s.serverVersion) : '—'}${proxy} &nbsp;•&nbsp; báo cáo ${timeAgo(s.lastSeen)}</div>
-  </div>`;
-}
-
-// Ô Server trong bảng tổng hợp: count x/y + danh sách server kèm online/offline
-function serverCell(k) {
-  const servers = k.servers || [];
-  const count = k.maxServers > 0
-    ? k.activeServers + '/' + k.maxServers + ' server' + (k.activeServers >= k.maxServers ? ' ⚠️' : '')
-    : k.activeServers + ' server';
-  if (!servers.length) return `<div class="srv-cell"><div class="muted srv-count">${count}</div><div class="muted">Chưa có server báo cáo</div></div>`;
-  const items = servers.map(s => `<div class="srv-item"><span class="dot ${s.online ? 'online' : 'offline'}"></span> ${escapeHtml(s.serverName || s.serverId)} <span class="srv-ip">${s.serverIp ? escapeHtml(s.serverIp) : ''}</span>${s.proxyName && s.proxyName !== s.serverName ? '<span class="srv-proxy">🔗 ' + escapeHtml(s.proxyName) + '</span>' : ''}<span class="srv-time">${timeAgo(s.lastSeen)}</span></div>`).join('');
-  return `<div class="srv-cell"><div class="muted srv-count">${count}</div><div class="srv-list">${items}</div></div>`;
-}
-
+// ─── Render ───
 function badge(k) {
   if (k.disabled) return '<span class="badge badge-red">⛔ Vô hiệu</span>';
-  if (k.expired) return '<span class="badge badge-yellow">⏰ Hết hạn</span>';
+  if (isExpired(k)) return '<span class="badge badge-yellow">⏰ Hết hạn</span>';
   return '<span class="badge badge-green">✅ Hoạt động</span>';
 }
-
+function updateStats() {
+  $('statTotal').textContent = keys.length;
+  $('statActive').textContent = keys.filter(isActive).length;
+  $('statExpired').textContent = keys.filter(isExpired).length;
+  $('statDisabled').textContent = keys.filter(k => k.disabled).length;
+}
 function renderTable() {
+  updateStats();
   const q = ($('searchInput').value || '').toLowerCase();
   const list = keys.filter(k => !q || k.code.toLowerCase().includes(q) || (k.note || '').toLowerCase().includes(q));
   const tbody = $('keyTable');
   if (!list.length) {
-    tbody.innerHTML = '<tr><td colspan="7"><div class="empty">Chưa có key nào. Tạo key ở form bên trên.</div></td></tr>';
+    tbody.innerHTML = '<tr><td colspan="7"><div class="empty">' + (keys.length ? 'Không tìm thấy key nào.' : 'Chưa có key nào. Tạo key ở form bên trên.') + '</div></td></tr>';
     return;
   }
   tbody.innerHTML = list.map(k => `
     <tr>
-      <td><span class="key-code">${k.code}</span></td>
+      <td><span class="key-code">${escapeHtml(k.code)}</span></td>
       <td>${badge(k)}</td>
-      <td>${serverCell(k)}</td>
+      <td class="muted">${k.maxServers > 0 ? k.maxServers : '∞'}</td>
       <td class="muted">${fmtTs(k.createdAt)}</td>
       <td class="muted">${k.expiresAt ? fmtTs(k.expiresAt) : '∞ Vĩnh viễn'}</td>
       <td class="muted">${k.note ? escapeHtml(k.note) : '—'}</td>
       <td>
         <div class="btn-group" style="justify-content:flex-end">
-          <button class="btn btn-secondary btn-sm" onclick="copyKey('${k.code}')">📋 Copy</button>
-          <button class="btn btn-primary btn-sm" onclick="showInfo('${k.code}')">🔍 Info</button>
-          <button class="btn btn-warning btn-sm" onclick="openRenew('${k.code}')">🔁 Gia hạn</button>
+          <button class="btn btn-secondary" onclick="copyKey('${escapeHtml(k.code)}')">📋 Copy</button>
+          <button class="btn btn-primary" onclick="showInfo('${escapeHtml(k.code)}')">🔍 Info</button>
+          <button class="btn btn-warning" onclick="openRenew('${escapeHtml(k.code)}')">🔁 Gia hạn</button>
           ${k.disabled
-            ? '<button class="btn btn-primary btn-sm" onclick="toggleDisable(\'' + k.code + '\', false)">✅ Bật lại</button>'
-            : '<button class="btn btn-warning btn-sm" onclick="toggleDisable(\'' + k.code + '\', true)">⛔ Chặn</button>'}
-          <button class="btn btn-danger btn-sm" onclick="deleteKey('${k.code}')">🗑 Xoá</button>
+            ? `<button class="btn btn-primary" onclick="toggleDisable('${escapeHtml(k.code)}', false)">✅ Bật lại</button>`
+            : `<button class="btn btn-warning" onclick="toggleDisable('${escapeHtml(k.code)}', true)">⛔ Chặn</button>`}
+          <button class="btn btn-danger" onclick="deleteKey('${escapeHtml(k.code)}')">🗑 Xoá</button>
         </div>
       </td>
     </tr>`).join('');
 }
 
-function escapeHtml(s) {
-  return String(s).replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;').replace(/"/g, '&quot;');
+// ─── Tạo / Gia hạn / Chặn / Xoá ───
+function generateCode() {
+  const rnd = (n) => { let s = ''; for (let i = 0; i < n; i++) s += KEY_ALPHABET[Math.floor(Math.random() * KEY_ALPHABET.length)]; return s; };
+  return 'LXH26-' + rnd(4) + '-' + rnd(4) + '-' + rnd(4);
 }
-
-// ─── TẠO KEY ───
-async function createKey() {
+function createKey() {
   const days = parseInt($('createDays').value, 10);
-  if (!days || days < 1) { toast('Nhập số ngày hiệu lực hợp lệ!', 'error'); return; }
+  if (isNaN(days) || days < 0 || days > 36500) { toast('Nhập số ngày hiệu lực hợp lệ (0-36500)!', 'error'); return; }
   const maxServers = Math.max(0, parseInt($('createMaxServers').value, 10) || 0);
   const note = $('createNote').value.trim();
-  const d = await api('/api/keys', 'POST', 'days=' + days + '&maxServers=' + maxServers + '&note=' + encodeURIComponent(note));
-  if (d && d.success) {
-    toast('✅ Đã tạo key: ' + d.key.code, 'success');
-    $('createDays').value = ''; $('createNote').value = ''; $('createMaxServers').value = '0';
-    await loadKeys();
-  } else {
-    toast('❌ ' + ((d && d.error) || 'Không tạo được key'), 'error');
-  }
+  let code = generateCode();
+  while (keys.some(k => k.code === code)) code = generateCode(); // tránh trùng
+  keys.unshift({
+    code,
+    createdAt: now(),
+    expiresAt: days <= 0 ? 0 : now() + days * 86400000,
+    note,
+    disabled: false,
+    maxServers
+  });
+  persist();
+  $('createDays').value = '30'; $('createNote').value = ''; $('createMaxServers').value = '0';
+  toast('✅ Đã tạo key: ' + code, 'success');
+  renderTable();
 }
-
-// ─── CHẶN / BẬT LẠI KEY (xoá/chặn key là plugin khách bị tắt) ───
-async function toggleDisable(code, disabled) {
-  const d = await api('/api/keys/' + encodeURIComponent(code) + (disabled ? '/disable' : '/enable'), 'POST', '');
-  if (d && d.success) {
-    toast((disabled ? '⛔ Đã chặn key ' : '✅ Đã bật lại key ') + code, 'success');
-    await loadKeys();
-  } else {
-    toast('❌ ' + ((d && d.error) || 'Lỗi'), 'error');
-  }
-}
-
-// ─── CHECK INFO ───
-async function showInfo(code) {
-  const d = await api('/api/keys/' + encodeURIComponent(code), 'GET');
-  const body = $('infoBody');
-  if (!d || !d.code) { body.innerHTML = '<p class="muted">Không tìm thấy key.</p>'; }
-  else {
-    const servers = (d.servers || []).map(serverRow).join('') || '<div class="muted">Chưa có server nào báo cáo.</div>';
-    body.innerHTML = `
-      <div class="info-row"><span class="k">Mã key</span><span class="v key-code">${d.code}</span></div>
-      <div class="info-row"><span class="k">Trạng thái</span><span class="v">${badge(d)}</span></div>
-      <div class="info-row"><span class="k">Ngày tạo</span><span class="v">${fmtTs(d.createdAt)}</span></div>
-      <div class="info-row"><span class="k">Hết hạn</span><span class="v">${d.expiresAt ? fmtTs(d.expiresAt) : '∞ Vĩnh viễn'}</span></div>
-      <div class="info-row"><span class="k">Server tối đa</span><span class="v">${d.maxServers > 0 ? d.maxServers : '∞ Không giới hạn'}</span></div>
-      <div class="info-row"><span class="k">Server đang dùng</span><span class="v">${d.activeServers || 0}${(d.maxServers > 0 && d.activeServers >= d.maxServers) ? ' ⚠️ ĐẦY' : ''}</span></div>
-      <div class="info-row"><span class="k">Ghi chú</span><span class="v">${d.note ? escapeHtml(d.note) : '—'}</span></div>
-      <div class="info-section">📡 Server đang dùng key (báo cáo mỗi phút)</div>
-      ${servers}`;
-  }
-  openModal('infoModal');
-}
-
-// ─── GIA HẠN ───
 function openRenew(code) {
   renewCode = code;
   $('renewKeyLabel').textContent = 'Key: ' + code;
   $('renewDays').value = '';
   openModal('renewModal');
 }
-
-async function doRenew() {
+function doRenew() {
   const days = parseInt($('renewDays').value, 10);
   if (!days || days < 1) { toast('Nhập số ngày gia hạn hợp lệ!', 'error'); return; }
-  const d = await api('/api/keys/' + encodeURIComponent(renewCode) + '/renew', 'POST', 'days=' + days);
-  if (d && d.success) {
-    toast('✅ Đã gia hạn ' + renewCode + ' thêm ' + days + ' ngày', 'success');
-    closeModal('renewModal');
-    await loadKeys();
-  } else {
-    toast('❌ ' + ((d && d.error) || 'Không gia hạn được'), 'error');
-  }
+  const k = keys.find(x => x.code === renewCode);
+  if (!k) { toast('Không tìm thấy key!', 'error'); return; }
+  const base = Math.max(now(), k.expiresAt || 0);
+  k.expiresAt = base + days * 86400000;
+  persist();
+  closeModal('renewModal');
+  toast('✅ Đã gia hạn ' + renewCode + ' thêm ' + days + ' ngày', 'success');
+  renderTable();
 }
-
-// ─── XOÁ ───
-async function deleteKey(code) {
+function toggleDisable(code, disabled) {
+  const k = keys.find(x => x.code === code);
+  if (!k) return;
+  k.disabled = disabled;
+  persist();
+  toast((disabled ? '⛔ Đã chặn key ' : '✅ Đã bật lại key ') + code, 'success');
+  renderTable();
+}
+function deleteKey(code) {
   if (!confirm('Xoá key ' + code + '?\nKey đã xoá sẽ KHÔNG dùng được nữa.')) return;
-  const d = await api('/api/keys/' + encodeURIComponent(code) + '/delete', 'POST');
-  if (d && d.success) {
-    toast('🗑 Đã xoá key ' + code, 'success');
-    await loadKeys();
-  } else {
-    toast('❌ ' + ((d && d.error) || 'Không xoá được key'), 'error');
-  }
+  keys = keys.filter(k => k.code !== code);
+  persist();
+  toast('🗑 Đã xoá key ' + code, 'success');
+  renderTable();
 }
-
+function showInfo(code) {
+  const k = keys.find(x => x.code === code);
+  const body = $('infoBody');
+  if (!k) { body.innerHTML = '<p class="muted">Không tìm thấy key.</p>'; }
+  else {
+    body.innerHTML = `
+      <div class="info-row"><span class="k">Mã key</span><span class="v key-code">${escapeHtml(k.code)}</span></div>
+      <div class="info-row"><span class="k">Trạng thái</span><span class="v">${badge(k)}</span></div>
+      <div class="info-row"><span class="k">Ngày tạo</span><span class="v">${fmtTs(k.createdAt)}</span></div>
+      <div class="info-row"><span class="k">Hết hạn</span><span class="v">${k.expiresAt ? fmtTs(k.expiresAt) : '∞ Vĩnh viễn'}</span></div>
+      <div class="info-row"><span class="k">Số server tối đa</span><span class="v">${k.maxServers > 0 ? k.maxServers : '∞ Không giới hạn'}</span></div>
+      <div class="info-row"><span class="k">Ghi chú</span><span class="v">${k.note ? escapeHtml(k.note) : '—'}</span></div>`;
+  }
+  openModal('infoModal');
+}
 function copyKey(code) {
   navigator.clipboard.writeText(code).then(() => toast('📋 Đã copy: ' + code, 'success'))
     .catch(() => toast('❌ Không copy được (dùng Ctrl+C)', 'error'));
 }
 
-// ─── MODAL helpers ───
+// ─── Export / Import keys.json (đúng định dạng plugin đọc) ───
+function exportKeysJson() {
+  const data = {
+    keys: keys.map(k => ({
+      code: k.code,
+      createdAt: k.createdAt,
+      expiresAt: k.expiresAt,
+      note: k.note || '',
+      disabled: !!k.disabled,
+      maxServers: k.maxServers || 0,
+      active: isActive(k),
+      expired: isExpired(k)
+    }))
+  };
+  const blob = new Blob([JSON.stringify(data, null, 2)], { type: 'application/json' });
+  const a = document.createElement('a');
+  a.href = URL.createObjectURL(blob);
+  a.download = 'keys.json';
+  a.click();
+  URL.revokeObjectURL(a.href);
+  toast('⬇️ Đã tải keys.json (' + keys.length + ' key) — bỏ vào plugins/AuthPremium/', 'success');
+}
+function importKeysJson(event) {
+  const file = event.target.files && event.target.files[0];
+  if (!file) return;
+  const reader = new FileReader();
+  reader.onload = () => {
+    try {
+      const parsed = JSON.parse(reader.result);
+      const arr = (parsed && Array.isArray(parsed.keys)) ? parsed.keys : [];
+      keys = arr.map(k => ({
+        code: String(k.code || '').trim().toUpperCase(),
+        createdAt: k.createdAt || 0,
+        expiresAt: k.expiresAt || 0,
+        note: k.note || '',
+        disabled: !!k.disabled,
+        maxServers: Math.max(0, parseInt(k.maxServers, 10) || 0)
+      })).filter(k => k.code);
+      persist();
+      toast('⬆️ Đã import ' + keys.length + ' key', 'success');
+      renderTable();
+    } catch (e) {
+      toast('❌ File không hợp lệ (cần {"keys":[...]})', 'error');
+    }
+  };
+  reader.readAsText(file);
+  event.target.value = '';
+}
+
+// ─── Modal helpers ───
 function openModal(id) { $(id).classList.add('active'); }
 function closeModal(id) { $(id).classList.remove('active'); }
 
-// ─── Enter login ───
-document.addEventListener('keydown', e => { if (e.key === 'Enter' && $('loginContainer').style.display !== 'none') doLogin(); });
+// ─── Khởi động ───
+(function init() {
+  if (localStorage.getItem(UNLOCK_KEY) === '1') enterApp();
+  document.addEventListener('keydown', e => {
+    if (e.key === 'Enter' && $('loginContainer').style.display !== 'none') doLogin();
+  });
+})();
 </script>
 </body>
 </html>
